@@ -1,16 +1,20 @@
 package org.lessons.java.shop;
 
 public class Product {
-    private int code;
+    private final int code;
     private String name, description;
     private double price, iva;
 
-    public Product(String name, String description, double iva, double price) {
+    private Category prodCategory;
+
+    public Product(String name, String description, double iva, double price, Category prodCategory) {
         this.code = generateRandomCode(1, Integer.MAX_VALUE);
         this.name = isValidName(name) ? name : "";
         this.description = isValidDesctiption(description) ? description : "";
         this.iva = isValidIva(iva) ? iva : -1.0d;
         this.price = isValidPrice(price) ? price : -1.0d;
+
+        this.prodCategory = prodCategory;
     }
 
     /* EXERCISE METHODS */
@@ -48,10 +52,6 @@ public class Product {
 
     private boolean isValidPrice(double price) {
         return price >= 0d;
-    }
-
-    private String isValidIva(String iva) {
-        return iva.length() == 11 ? iva : "";
     }
 
     /* GETTER AND SETTER */
@@ -94,5 +94,13 @@ public class Product {
     public void setPrice(double price) {
         if (isValidPrice(price))
             this.price = price;
+    }
+
+    public Category getProdCategory() {
+        return prodCategory;
+    }
+
+    public void setProdCategory(Category prodCategory) {
+        this.prodCategory = prodCategory;
     }
 }
