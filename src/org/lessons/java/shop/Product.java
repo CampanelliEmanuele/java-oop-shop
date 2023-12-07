@@ -7,13 +7,33 @@ public class Product {
 
     private Category prodCategory;
 
-    public Product(String name, String description, double iva, double price, Category prodCategory) {
-        this.code = generateRandomCode(1, Integer.MAX_VALUE);
-        this.name = isValidName(name) ? name : "";
-        this.description = isValidDesctiption(description) ? description : "";
-        this.iva = isValidIva(iva) ? iva : -1.0d;
-        this.price = isValidPrice(price) ? price : -1.0d;
+    // Older constructor
+//    public Product (String name, String description, double iva, double price, Category prodCategory) {
+//        this.code = generateRandomCode(1, Integer.MAX_VALUE);
+//        this.name = isValidName(name) ? name : "";
+//        this.description = isValidDesctiption(description) ? description : "";
+//        this.iva = isValidIva(iva) ? iva : -1.0d;
+//        this.price = isValidPrice(price) ? price : -1.0d;
+//
+//        this.prodCategory = prodCategory;
+//    }
 
+    public Product (String name, String description, double iva, double price, Category prodCategory) throws IllegalArgumentException {
+        this.code = generateRandomCode(1, Integer.MAX_VALUE);
+
+        if (isValidName(name))
+            this.name = name;
+        else
+            throw new IllegalArgumentException("ERROR: Name cannot be empty or be a single character.");
+
+        if (isValidIva(iva) && isValidPrice(price)) {
+            this.iva = iva;
+            this.price = price;
+        }
+        else
+            throw new IllegalArgumentException("ERROR: both iva and price must have positive values.");
+
+        this.description = isValidDesctiption(description) ? description : "";
         this.prodCategory = prodCategory;
     }
 
