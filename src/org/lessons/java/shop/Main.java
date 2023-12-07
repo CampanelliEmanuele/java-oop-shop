@@ -9,16 +9,20 @@ public class Main {
 
         Category category = new Category("category1", "category1Description");
         try {
+            // Getting inputs
             System.out.println("Enter in the following order: product's name, product's description, product's iva and product's price.");
             String prodName = scanner.nextLine();
             String prodDesc = scanner.nextLine();
             double prodIva = Double.parseDouble(scanner.nextLine());
             double prodPrice = Double.parseDouble(scanner.nextLine());
 
+            // Object creation and info printing
             prod = new Product(prodName, prodDesc, prodIva, prodPrice, category);
             printInfos(prod);
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid inputs detected: automatic creation of the product object.");
+            System.out.println("INVALID INPUTS DETECTED: automatic creation of the product object with arbitrary values.");
+
+            // Automatic object creation and info printing
             prod = new Product("prodName", "prodDescription", 23.0d, 10.00d, category);
             printInfos(prod);
         } finally {
